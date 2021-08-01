@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
 import logoImg from '../assets/images/logo.svg';
 import deleteImg from '../assets/images/delete.svg';
@@ -7,7 +7,7 @@ import deleteImg from '../assets/images/delete.svg';
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
 import { RoomCode } from '../components/RoomCode';
-import { useAuth } from '../hooks/useAuth';
+// import { useAuth } from '../hooks/useAuth';
 import { useRoom } from '../hooks/useRoom';
 
 import '../styles/room.scss';
@@ -18,11 +18,20 @@ type RoomParams = {
 }
 
 export function AdminRoom() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const history = useHistory();
   const params = useParams<RoomParams>();
   const roomId = params.id;
 
   const { questions, title } = useRoom(roomId);
+
+  async function handleEndRoom() {
+    await database.ref(`rooms/${roomId}`).update({
+      endedAt: new Date(),
+    })
+
+    history.push('/');
+  }
 
   async function handleDeleteQuestion(questionId: string) {
     if (window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
@@ -39,7 +48,7 @@ export function AdminRoom() {
             <RoomCode
               code={roomId}
             />
-            <Button isOutlined >Encerrar Sala</Button>
+            <Button isOutlined onClick={handleEndRoom} >Encerrar Sala</Button>
           </div>
         </div>
       </header>
