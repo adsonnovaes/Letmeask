@@ -26,6 +26,12 @@
     color: #835afd;
   }
 
+  &.confirmed {
+    background: #E73F5D;
+    border-radius: 8px;
+    color: #FFF;
+  }
+
   &:not(:disabled):hover {
     filter: brightness(0.9);
   }

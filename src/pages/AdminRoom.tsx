@@ -12,6 +12,8 @@ import { useRoom } from '../hooks/useRoom';
 
 import '../styles/room.scss';
 import { database } from '../services/firebase';
+import { Modal } from '../components/Modal';
+import { useState } from 'react';
 
 type RoomParams = {
   id: string;
@@ -24,6 +26,7 @@ export function AdminRoom() {
   const roomId = params.id;
 
   const { questions, title } = useRoom(roomId);
+  const [isVisible, setIsVisible] = useState(false);
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
@@ -48,7 +51,7 @@ export function AdminRoom() {
             <RoomCode
               code={roomId}
             />
-            <Button isOutlined onClick={handleEndRoom} >Encerrar Sala</Button>
+            <Button isOutlined onClick={()=>setIsVisible(true)} >Encerrar Sala</Button>
           </div>
         </div>
       </header>
@@ -78,6 +81,16 @@ export function AdminRoom() {
             );
           })}
         </div>
+
+        <Modal
+          isOpen={isVisible}
+          setVisibility={()=>{
+            setIsVisible(false)
+          }}
+          handleConfirmed={()=>handleEndRoom()}
+        >
+          Tem certeza que você deseja encerrar esta sala?
+        </Modal>
 
       </main>
     </div>
