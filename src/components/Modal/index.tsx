@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import ReactModal from 'react-modal';
 
 import alertImg from '../../assets/images/alert.svg';
