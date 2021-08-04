@@ -1,5 +1,6 @@
 // import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { FiLogOut } from 'react-icons/fi';
 
 import logoImg from '../assets/images/logo.svg';
 import deleteImg from '../assets/images/delete.svg';
@@ -9,7 +10,7 @@ import answerImg from '../assets/images/answer.svg';
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
 import { RoomCode } from '../components/RoomCode';
-// import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/useAuth';
 import { useRoom } from '../hooks/useRoom';
 
 import '../styles/room.scss';
@@ -23,7 +24,7 @@ type RoomParams = {
 }
 
 export function AdminRoom() {
-  // const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const history = useHistory();
   const params = useParams<RoomParams>();
   const roomId = params.id;
@@ -56,6 +57,15 @@ export function AdminRoom() {
     });
   }
 
+  async function handlerSignOut() {
+
+    if (user) {
+      await signOut();
+    }
+
+    history.push('/');
+  }
+
   return (
     <div id="page-room">
       <header>
@@ -65,7 +75,15 @@ export function AdminRoom() {
             <RoomCode
               code={roomId}
             />
-            <Button isOutlined onClick={() => setIsVisible(true)} >Encerrar Sala</Button>
+            <Button 
+              isOutlined 
+              onClick={() => setIsVisible(true)} 
+            >
+              Encerrar Sala
+            </Button>
+            <Button onClick={handlerSignOut} >
+              <FiLogOut/>
+            </Button>
           </div>
         </div>
       </header>
