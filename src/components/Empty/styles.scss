@@ -1,0 +1,23 @@
+.empty-container {
+
+  padding-top: 8%;
+  padding-bottom: 2%;
+
+  flex-direction: column;
+
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    color: #29292E;
+    font: 600 18px 'Poppins', sans-serif;
+  }
+
+  p {
+    color: #737380;
+    font: 400 14px 'Roboto', sans-serif;
+
+    line-height: 21px;
+  }
+}

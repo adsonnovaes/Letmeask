@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import logoImg from '../assets/images/logo.svg';
 
 import { Button } from '../components/Button';
+import { Empty } from '../components/Empty';
 import { Question } from '../components/Question';
 import { RoomCode } from '../components/RoomCode';
 import { useAuth } from '../hooks/useAuth';
@@ -97,7 +98,12 @@ export function Room() {
           </div>
         </form>
 
-        <div className="question-list">
+        {questions.length <= 0 ? (
+          <Empty>
+            Faça o seu login e seja a primeira pessoa a fazer uma pergunta!
+          </Empty>
+        ) : (
+          <div className="question-list">
           {questions.map(question => {
             return (
               <Question
@@ -124,6 +130,7 @@ export function Room() {
             );
           })}
         </div>
+        )}
 
       </main>
     </div>
