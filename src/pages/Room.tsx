@@ -2,7 +2,8 @@ import { FormEvent, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
 
-import logoImg from '../assets/images/logo.svg';
+// import logoImg from '../assets/images/logo.svg';
+import { ReactComponent as Logo } from '../assets/images/logo.svg';
 
 import { Button } from '../components/Button';
 import { Empty } from '../components/Empty';
@@ -86,15 +87,16 @@ export function Room() {
     <div id="page-room">
       <header>
         <div className="content">
-          <img src={logoImg} alt="Letmeask" />
+          {/* <img src={logoImg} alt="Letmeask" /> */}
+          <Logo/>
           <div>
             <RoomCode
               code={roomId}
             />
             <Button onClick={handlerSignOut} >
-              <FiLogOut/>
+              <FiLogOut />
             </Button>
-            <Toggle/>
+            <Toggle />
           </div>
         </div>
       </header>

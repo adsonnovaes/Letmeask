@@ -2,7 +2,9 @@
 import { useHistory, useParams } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
 
-import logoImg from '../assets/images/logo.svg';
+// import logoImg from '../assets/images/logo.svg';
+import { ReactComponent as Logo } from '../assets/images/logo.svg';
+
 import deleteImg from '../assets/images/delete.svg';
 import checkImg from '../assets/images/check.svg';
 import answerImg from '../assets/images/answer.svg';
@@ -72,7 +74,8 @@ export function AdminRoom() {
     <div id="page-room">
       <header>
         <div className="content">
-          <img src={logoImg} alt="Letmeask" />
+          {/* <img src={logoImg} alt="Letmeask" /> */}
+          <Logo/>
           <div>
             <RoomCode
               code={roomId}
