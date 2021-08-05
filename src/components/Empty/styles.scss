@@ -10,12 +10,12 @@
   align-items: center;
 
   h2 {
-    color: #29292E;
+    color: var(--theme-text-primary);
     font: 600 18px 'Poppins', sans-serif;
   }
 
   p {
-    color: #737380;
+    color: var(--theme-text-secondary);
     font: 400 14px 'Roboto', sans-serif;
 
     line-height: 21px;

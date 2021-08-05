@@ -1,14 +1,38 @@
-*{
+.theme-dark {
+    --theme-text-primary: #ebe7e7;
+    --theme-text-secondary: #8a8a99;
+    --theme-background: #322652;
+    --theme-link: #e559f9;
+    --theme-principal: #835afd;
+    --theme-border: #47396d;
+
+
+}
+
+.theme-light {
+    --theme-text-primary: #29292e;
+    --theme-text-secondary: #737380;
+    --theme-background: #F8F8F8;
+    --theme-link: #e559f9;
+    --theme-principal: #835afd;
+    --theme-border: #e2e2e2;
+
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    background: #f8f8f8;
-    color: #29292e;
+    background: var(--theme-background);
+    color: var(--theme-text-primary);
 }
 
-body, input, button, textarea {
-    font: 400 16px 'Roboto', sans-serif;
+body,
+input,
+button,
+textarea {
+    font: 400 16px "Roboto", sans-serif;
 }

@@ -13,6 +13,7 @@ import { useRoom } from '../hooks/useRoom';
 import { database } from '../services/firebase';
 
 import '../styles/room.scss';
+import Toggle from '../components/Toggle';
 
 type RoomParams = {
   id: string;
@@ -93,6 +94,7 @@ export function Room() {
             <Button onClick={handlerSignOut} >
               <FiLogOut/>
             </Button>
+            <Toggle/>
           </div>
         </div>
       </header>
