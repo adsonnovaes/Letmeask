@@ -75,21 +75,21 @@ export function AdminRoom() {
       <header>
         <div className="content">
           {/* <img src={logoImg} alt="Letmeask" /> */}
-          <Logo/>
+          <Logo />
           <div>
             <RoomCode
               code={roomId}
             />
-            <Button 
-              isOutlined 
-              onClick={() => setIsVisible(true)} 
+            <Button
+              isOutlined
+              onClick={() => setIsVisible(true)}
             >
               Encerrar Sala
             </Button>
             <Button onClick={handlerSignOut} >
-              <FiLogOut/>
+              <FiLogOut />
             </Button>
-            <Toggle/>
+            <Toggle />
           </div>
         </div>
       </header>
@@ -107,7 +107,7 @@ export function AdminRoom() {
           </Empty>
         ) : (
           <div className="question-list">
-            {questions.map(question => {
+            {questions.sort(quest => !quest.isAnswered ? -1 : 1).map(question => {
               return (
                 <Question
                   key={question.id}
