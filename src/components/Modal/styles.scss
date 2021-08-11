@@ -4,11 +4,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  opacity: 1;
   margin-left: -25%;
   margin-top: -10%;
-  // right: 40px;
-  // bottom: 40px;
-  background: #f8f8f8;
+  background: var(--theme-background-modal);
   border-radius: 8px;
 
   flex-direction: column;
@@ -26,13 +25,13 @@
 
     h2 {
       font-size: 24px;
-      color: #2e2a29;
+      color: var(--theme-text-primary);
     }
 
     span {
       margin-top: 5px;
       font-size: 16px;
-      color: #737380;
+      color: var(--theme-text-secondary);
     }
   }
 
@@ -48,6 +47,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: #050206;
-  opacity: 0.8;
+  background: rgba(0, 0, 0,0.8);
+  // opacity: 0.8;
 }
