@@ -6,21 +6,21 @@
   --yellow-background: #fffaa8;
   --yellow-border: #f5eb71;
   /** dark side **/
-  --indigo-background: #232838;
-  --indigo-border: #6b528b;
+  --indigo-background: #221b41;
+  --indigo-border: #47396d;
   --indigo-color: #6b7abb;
-  --gray-border: rgb(199, 198, 198);
-  --gray-dots: #e5e5eb;
+  --gray-border: rgb(177, 177, 177);
+  --gray-dots: #ebe5e6;
 }
 
 @keyframes reverse {
   0% {
-      left: 47px;
-      width: 10px;
+    left: 30px;
+    width: 15px;
   }
   60% {
       left: 3px;
-      width: 60px;
+      width: 40px;
   }
   100% {
       left: 3px;
@@ -33,10 +33,10 @@
   }
   60% {
       left: 3px;
-      width: 60px;
+      width: 40px;
   }
   100% {
-      left: 47px;
+      left: 30px;
       width: 15px;
   }
 }
@@ -48,15 +48,13 @@
 .container--toggle {
   display: grid;
   place-items: center;
-  // min-height: 60px;
   position: relative;
   grid-area: toggle;
-  // margin: 20px;
 }
 
 /* background */
 .toggle--label {
-  width: 80px;
+  width: 60px;
   height: 30px;
   background: var(--indigo-background);
   border-radius: 100px;
@@ -96,13 +94,12 @@
   background: rgb(199, 198, 198);
 }
 
-/* moon dimples */
+/* moon simples */
 .toggle--label:after {
   transition-delay: 0ms;
   transition: all 250ms ease-in;
   position: absolute;
   content: '';
-  // box-shadow: var(--gray-dots) -14px 0 0 1px, var(--gray-dots) -22px 12px 0 -1px;
   left: 60px;
   top: 3px;
   width: 2px;
@@ -120,20 +117,20 @@
 /* clouds */
 .toggle--checkbox:checked + .toggle--label .toggle--label-background {
   width: 5px;
-  left: 53px;
+  left: 40px;
   top: 10px;
 }
 
 .toggle--checkbox:checked + .toggle--label .toggle--label-background:before {
   top: -4px;
   left: -5px;
-  width: 20px;
+  width: 17px;
   height: 5px;
 }
 
 .toggle--checkbox:checked + .toggle--label .toggle--label-background:after {
   top: 3px;
-  width: 20px;
+  width: 19px;
   height: 5px;
   left: -10px;
 }
@@ -143,7 +140,7 @@
   border-radius: 5px;
   position: relative;
   background: white;
-  left: 32px;
+  left: 26px;
   width: 4px;
   transition: all 150ms ease-in;
   top: 12px;
@@ -155,10 +152,10 @@
   position: absolute;
   width: 4px;
   height: 4px;
-  top: -10px;
+  top: -9px;
   border-radius: 5px;
   background: #FFF;
-  left: -20px;
+  left: -11px;
   transition: all 150ms ease-in;
 }
 
@@ -167,8 +164,8 @@
   position: absolute;
   width: 4px;
   height: 4px;
-  left: -20px;
-  top: 5px;
+  left: -16px;
+  top: 3px;
   border-radius: 5px;
   background: #FFF;
   transition: all 150ms ease-in;
