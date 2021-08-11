@@ -20,7 +20,7 @@ import { useRoom } from '../hooks/useRoom';
 import '../styles/room.scss';
 import { database } from '../services/firebase';
 import { Modal } from '../components/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Empty } from '../components/Empty';
 
 type RoomParams = {
@@ -34,7 +34,11 @@ export function AdminRoom() {
   const roomId = params.id;
 
   const { questions, title } = useRoom(roomId);
+
+  const [questionIdControl, setQuestionIdControl] = useState<string|undefined>();
+
   const [isVisible, setIsVisible] = useState(false);
+  const [isVisibleModalQuestion, setIsVisibleModalQuestion] = useState(false);
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
@@ -44,8 +48,9 @@ export function AdminRoom() {
     history.push('/');
   }
 
-  async function handleDeleteQuestion(questionId: string) {
-    if (window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
+  async function handleDeleteQuestion(questionId: string|undefined) {
+    setIsVisibleModalQuestion(false);
+    if (questionId) {
       await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
     }
   }
@@ -69,6 +74,13 @@ export function AdminRoom() {
 
     history.push('/');
   }
+
+  useEffect(() => {
+    if(!!questionIdControl){
+      console.log(questionIdControl)
+      setIsVisibleModalQuestion(true);
+    }
+  },[questionIdControl]);
 
   return (
     <div id="page-room">
@@ -134,7 +146,7 @@ export function AdminRoom() {
                   )}
                   <button
                     type="button"
-                    onClick={() => handleDeleteQuestion(question.id)}
+                    onClick={() => setQuestionIdControl(question.id)}
                   >
                     <img src={deleteImg} alt="Remover pergunta" />
                   </button>
@@ -143,6 +155,17 @@ export function AdminRoom() {
             })}
           </div>
         )}
+
+        <Modal
+          isOpen={isVisibleModalQuestion}
+          setVisibility={() => {
+            setIsVisibleModalQuestion(false)
+            setQuestionIdControl(undefined);
+          }}
+          handleConfirmed={() => handleDeleteQuestion(questionIdControl)}
+        >
+          Tem certeza que você deseja excluir esta pergunta?
+        </Modal>
 
         <Modal
           isOpen={isVisible}
