@@ -10,6 +10,7 @@ import checkImg from '../assets/images/check.svg';
 import answerImg from '../assets/images/answer.svg';
 
 import Toggle from '../components/Toggle';
+import { Toast, showToast } from '../components/Toast';
 
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
@@ -39,6 +40,12 @@ export function AdminRoom() {
 
   const [isVisible, setIsVisible] = useState(false);
   const [isVisibleModalQuestion, setIsVisibleModalQuestion] = useState(false);
+
+  useEffect(() => {
+    if(user){
+      showToast({type: "success", message: `Seja bem vindo ${user?.name}`});
+    }
+  },[user])
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
@@ -176,6 +183,8 @@ export function AdminRoom() {
         >
           Tem certeza que você deseja encerrar esta sala?
         </Modal>
+
+        <Toast/>
 
       </main>
     </div>

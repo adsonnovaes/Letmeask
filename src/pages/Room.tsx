@@ -1,6 +1,7 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
+import { Toast, showToast } from '../components/Toast';
 
 // import logoImg from '../assets/images/logo.svg';
 import { ReactComponent as Logo } from '../assets/images/logo.svg';
@@ -83,12 +84,18 @@ export function Room() {
     history.push('/');
   }
 
+  useEffect(() => {
+    if (user) {
+      showToast({ type: "success", message: `Seja bem vindo ${user?.name}` });
+    }
+  }, [user])
+
   return (
     <div id="page-room">
       <header>
         <div className="content">
           {/* <img src={logoImg} alt="Letmeask" /> */}
-          <Logo/>
+          <Logo />
           <div>
             <RoomCode
               code={roomId}
@@ -161,6 +168,8 @@ export function Room() {
             })}
           </div>
         )}
+
+        <Toast />
 
       </main>
     </div>
