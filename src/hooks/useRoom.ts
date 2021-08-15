@@ -28,10 +28,21 @@ type FirebaseQuestions = Record<string, {
   }>;
 }>
 
+type CountType = {
+  answeredCount: number;
+  pendingCount: number;
+  totalCount: number;
+}
+
 export function useRoom(roomId: string) {
   const { user } = useAuth();
   const [questions, setQuestions] = useState<QuestionType[]>([])
   const [title, setTitle] = useState('');
+  const [countQuestions, setCountQuestions] = useState<CountType>({
+    answeredCount: 0,
+    pendingCount: 0,
+    totalCount: 0
+  });
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
@@ -39,8 +50,19 @@ export function useRoom(roomId: string) {
     roomRef.on('value', room => {
       const databaseRoom = room.val();
       const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
+      let counter : CountType = {
+        answeredCount: 0,
+        pendingCount: 0,
+        totalCount: 0
+      };
 
       const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
+        if(value.isAnswered){
+          counter.answeredCount++;
+        } else if(!value.isAnswered){
+          counter.pendingCount++;
+        }
+
         return {
           id: key,
           content: value.content,
@@ -52,14 +74,17 @@ export function useRoom(roomId: string) {
         }
       });
 
+      counter.totalCount += parsedQuestions.length;
+
       setTitle(databaseRoom.title);
       setQuestions(parsedQuestions);
+      setCountQuestions(counter);
     })
 
     return() => {
       roomRef.off('value');
     }
   }, [roomId, user?.id]);
-
-  return { questions, title };
+ 
+  return { questions, title, countQuestions };
 }

@@ -23,6 +23,7 @@ import { database } from '../services/firebase';
 import { Modal } from '../components/Modal';
 import { useEffect, useState } from 'react';
 import { Empty } from '../components/Empty';
+import { InfoQuestion } from '../components/InfoQuestion';
 
 type RoomParams = {
   id: string;
@@ -34,18 +35,18 @@ export function AdminRoom() {
   const params = useParams<RoomParams>();
   const roomId = params.id;
 
-  const { questions, title } = useRoom(roomId);
+  const { questions, title, countQuestions } = useRoom(roomId);
 
-  const [questionIdControl, setQuestionIdControl] = useState<string|undefined>();
+  const [questionIdControl, setQuestionIdControl] = useState<string | undefined>();
 
   const [isVisible, setIsVisible] = useState(false);
   const [isVisibleModalQuestion, setIsVisibleModalQuestion] = useState(false);
 
   useEffect(() => {
-    if(user){
-      showToast({type: "success", message: `Seja bem vindo ${user?.name}`});
+    if (user) {
+      showToast({ type: "success", message: `Seja bem vindo ${user?.name}` });
     }
-  },[user])
+  }, [user])
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
@@ -54,8 +55,8 @@ export function AdminRoom() {
 
     history.push('/');
   }
-
-  async function handleDeleteQuestion(questionId: string|undefined) {
+ 
+  async function handleDeleteQuestion(questionId: string | undefined) {
     setIsVisibleModalQuestion(false);
     if (questionId) {
       await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
@@ -83,11 +84,11 @@ export function AdminRoom() {
   }
 
   useEffect(() => {
-    if(!!questionIdControl){
+    if (!!questionIdControl) {
       console.log(questionIdControl)
       setIsVisibleModalQuestion(true);
     }
-  },[questionIdControl]);
+  }, [questionIdControl]);
 
   return (
     <div id="page-room">
@@ -112,6 +113,12 @@ export function AdminRoom() {
           </div>
         </div>
       </header>
+
+      <InfoQuestion
+        answeredCount={countQuestions.answeredCount}
+        pendingCount={countQuestions.pendingCount}
+        total={countQuestions.totalCount}
+      />
 
       <main>
         <div className="room-title">
@@ -184,7 +191,7 @@ export function AdminRoom() {
           Tem certeza que você deseja encerrar esta sala?
         </Modal>
 
-        <Toast/>
+        <Toast />
 
       </main>
     </div>

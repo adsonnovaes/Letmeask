@@ -1,0 +1,32 @@
+aside {
+  flex-direction: row;
+
+  display: flex; 
+  justify-content: space-around;
+  align-items: center;
+
+  div {
+
+    border-left: 2px solid rgb(64, 37, 110);
+    padding-left: 8px;
+    margin-top: 18px;
+    gap: 8px;
+
+    flex-direction: row;
+
+    display: flex; 
+    justify-content: space-evenly;
+    align-items: center;
+
+    h3 {
+      color: var(--theme-text-primary);
+      font: 500 16px "Poppins", sans-serif;
+    }
+
+    span {
+      color: rgb(95, 64, 143);
+      font: bold 16px "Poppins", sans-serif;
+    }
+
+  }
+}
