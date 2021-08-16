@@ -85,7 +85,6 @@ export function AdminRoom() {
 
   useEffect(() => {
     if (!!questionIdControl) {
-      console.log(questionIdControl)
       setIsVisibleModalQuestion(true);
     }
   }, [questionIdControl]);
